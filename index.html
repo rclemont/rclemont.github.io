@@ -606,7 +606,7 @@ async function generateTool(tool){
   output.style.display="none";loading.style.display="flex";
   try{
     var prompt=getPrompt(tool,passage,question);
-    var response=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,messages:[{role:"user",content:prompt}]})});
+    var response=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","x-api-key":"YOUR_API_KEY_HERE","anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,messages:[{role:"user",content:prompt}]})});
     var data=await response.json();
     var text=data.content.map(function(b){return b.text||"";}).join("");
     loading.style.display="none";content.textContent=text;output.style.display="block";
